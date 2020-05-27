@@ -1,0 +1,19 @@
+<form [formGroup]="exchangeRateForm">
+  <div>
+    <label for="baseCurrency">Base currency:</label>
+    <input formControlName="baseCurrency" id="baseCurrency" type="text" maxlength="3" />
+  </div>
+  <div>
+    <label for="filteredCurrencies">
+       Add filtered currencies.
+    </label>
+    <ng-container id="filteredCurrencies" formArrayName="filteredCurrencies">
+        <button (click)="addFilteredCurrency()">Add next</button>
+        <div *ngFor="let currency of getFilteredCurrencies().controls; index as id">
+            <input [formControlName]="id" /><button (click)="removeFilteredCurrency(id)">Remove</button>
+        </div>
+    </ng-container>
+  </div>
+
+  <div><button type="submit" (click)="submitForm(exchangeRateForm)">Submit</button></div>
+</form>

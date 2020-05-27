@@ -1,0 +1,6 @@
+<div><h1>{{ title }}</h1>
+<button (click)='loadExchangeRateForm($event)'>Check exchange rates</button>
+<button (click)='loadExchangeValueForm($event)'>Calculate exchange value</button>
+<app-exchange-rate *ngIf="showExchangRate"></app-exchange-rate>
+<app-exchange-value *ngIf="showExchaneValue"></app-exchange-value>
+</div>
