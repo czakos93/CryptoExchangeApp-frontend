@@ -1,6 +1,11 @@
-<div><h1>{{ title }}</h1>
-<button (click)='loadExchangeRateForm($event)'>Check exchange rates</button>
-<button (click)='loadExchangeValueForm($event)'>Calculate exchange value</button>
-<app-exchange-rate *ngIf="showExchangRate"></app-exchange-rate>
-<app-exchange-value *ngIf="showExchaneValue"></app-exchange-value>
-</div>
+<mat-toolbar><span>{{ title }}</span></mat-toolbar>
+<mat-card>
+    <mat-button-toggle-group>
+        <mat-button-toggle (click)='loadExchangeRateForm($event)'>Check exchange rates</mat-button-toggle>
+        <mat-button-toggle (click)='loadExchangeValueForm($event)'>Calculate exchange value</mat-button-toggle>
+    </mat-button-toggle-group>
+    <mat-card-content>
+        <app-exchange-rate *ngIf="showExchangRate"></app-exchange-rate>
+        <app-exchange-value *ngIf="showExchaneValue"></app-exchange-value>
+    </mat-card-content>
+</mat-card>

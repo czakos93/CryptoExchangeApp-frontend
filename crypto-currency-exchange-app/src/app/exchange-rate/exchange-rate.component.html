@@ -1,19 +1,28 @@
 <form [formGroup]="exchangeRateForm">
+  <mat-form-field>
+    <mat-label for="baseCurrency">Base currency</mat-label>
+    <input #baseCurrency [value]="baseCurrency.value.toUpperCase()" matInput required formControlName="baseCurrency" type="text" maxlength="3" />
+    <mat-hint align="start">Currency acronym</mat-hint>
+  </mat-form-field>
   <div>
-    <label for="baseCurrency">Base currency:</label>
-    <input formControlName="baseCurrency" id="baseCurrency" type="text" maxlength="3" />
-  </div>
-  <div>
-    <label for="filteredCurrencies">
-       Add filtered currencies.
-    </label>
+      <br>Destination currencies.
+      <br>Leave it blank if you want to check the exchange rate for all currencies
     <ng-container id="filteredCurrencies" formArrayName="filteredCurrencies">
-        <button (click)="addFilteredCurrency()">Add next</button>
-        <div *ngFor="let currency of getFilteredCurrencies().controls; index as id">
-            <input [formControlName]="id" /><button (click)="removeFilteredCurrency(id)">Remove</button>
-        </div>
+      <button mat-icon-button color="accent" (click)="addFilteredCurrency()" arial-label="add destination currency">
+        <mat-icon>add</mat-icon>
+      </button>
+      <div *ngFor="let currency of getFilteredCurrencies().controls; index as id">
+        <mat-form-field>
+          <mat-label>Destination currency</mat-label>
+          <input #destinationCurrency [value]="destinationCurrency.value.toUpperCase()" maxlength="3" matInput [formControlName]="id" />
+        </mat-form-field>
+        <button mat-icon-button color="warn" (click)="removeFilteredCurrency(id)" arial-label="remove destination currency">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
     </ng-container>
   </div>
 
-  <div><button type="submit" (click)="submitForm(exchangeRateForm)">Submit</button></div>
+  <div><button mat-flat-button color="accent" type="submit" (click)="submitForm(exchangeRateForm)">Submit</button>
+  </div>
 </form>
