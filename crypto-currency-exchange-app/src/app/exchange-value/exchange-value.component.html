@@ -1,1 +1,34 @@
-<p>not implemented yet</p>
+<form [formGroup]="exchangeValueForm">
+    <div>
+        <mat-form-field>
+            <mat-label>Base currency</mat-label>
+            <input placeholder="USD" #baseCurrency [value]="baseCurrency.value.toUpperCase()" matInput required
+                formControlName="baseCurrency" maxlength="3">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
+            <mat-chip-list #currencyList aria-label="Destination curencies">
+                <mat-chip *ngFor="let currency of destinationCurrencies"
+                    (removed)="removeDestinationCurrency(currency)">
+                    {{currency}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+            <mat-label>Destination currencies</mat-label>
+            <input #destinationCurrency [value]="destinationCurrency.value.toUpperCase()" maxlength="3" type="text"
+                placeholder="USD" matInput required [matChipInputFor]="currencyList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="addDestinationCurrency($event)">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
+            <mat-label>Amount</mat-label>
+            <input placeholder="1000" type="number" matInput required formControlName="amount">
+        </mat-form-field>
+    </div>
+    <div>
+        <button mat-flat-button color="accent" type="submit" (click)="submit(exchangeValueForm)">Submit</button>
+    </div>
+</form>
